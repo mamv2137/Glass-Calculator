@@ -8,7 +8,7 @@ const useTimer = (minutes = 5) => {
     if (status === 'pause') return;
     setInterval(function () {
       if (status === 'start') {
-        if (count === 0) return reset();
+        if (count === 0) return finish();
         setCount(--count);
       }
     }, 1000);
@@ -26,6 +26,11 @@ const useTimer = (minutes = 5) => {
   const reset = () => {
     setStatus('idle');
     setCount(minutes);
+  };
+
+  const finish = () => {
+    reset();
+    // add sound
   };
 
   return { count, status, start, pause, reset };
