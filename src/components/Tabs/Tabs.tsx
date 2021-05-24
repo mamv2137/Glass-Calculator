@@ -1,22 +1,23 @@
-import React from 'react';
+import { useState } from 'react';
 import Tab from './Tab';
+import StyledTabs from './Tabs.styles';
 
-interface Props {
-    
-}
+interface Props {}
 
 const Tabs = (props: Props) => {
-    return (
-      <div className="flex justify-center bg-purple-tabs rounded-full h-14 p-2 text-sm">
-        <Tab>pomodoro</Tab>
-        <span className="flex items-center font-semibold px-14 cursor-pointer">
-          short break
-        </span>
-        <span className="flex items-center text-gray-400 font-semibold px-14 cursor-pointer">
-          long break
-        </span>
-      </div>
-    );
-}
+  const [selectedTab, setSelectedTab] = useState(0);
+  const tabsText = ['pomodoro', 'short break', 'long break'];
 
-export default Tabs
+  const renderTabs = () =>
+    tabsText.map((text, index) => (
+      <Tab
+        key={text}
+        onClick={() => setSelectedTab(index)}
+        isActive={selectedTab === index}>
+        {text}
+      </Tab>
+    ));
+  return <StyledTabs className="">{renderTabs()}</StyledTabs>;
+};
+
+export default Tabs;
